@@ -1,0 +1,123 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")   // Koneksi Pooling (Buat Aplikasi/Vercel)
+  directUrl = env("DIRECT_URL")
+}
+
+// --- ENUMS ---
+enum Role {
+  GUEST
+  STAFF
+  ADMIN
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  SEATED
+  COMPLETED
+  CANCELLED
+}
+
+enum RequestStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+}
+
+// --- MODELS ---
+
+model User {
+  id        String   @id @default(uuid())
+  username  String?  @unique // <--- TAMBAHAN BARU
+  password  String?          // <--- TAMBAHAN BARU
+  email     String   @unique
+  fullName  String?
+  phone     String?
+  role      Role     @default(GUEST)
+  createdAt DateTime @default(now())
+  
+  reservations Reservation[]
+}
+
+model Chapter {
+  id          String   @id @default(uuid())
+  sequence    Int      // 1, 2, 3
+  title       String   // "Chapter I: Origins"
+  description String?  @db.Text
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean  @default(false)
+  
+  courses      Course[]
+  reservations Reservation[] // Setiap reservasi terikat pada Chapter aktif saat itu
+}
+
+model Course {
+  id          String  @id @default(uuid())
+  chapterId   String
+  sequence    Int     // Urutan keluarnya makanan (1-12)
+  name        String
+  description String?
+  tags        String? // "Vegan, Shellfish" (Simpan sbg string simple dulu)
+  pairing     String?  @db.Text // Contoh: "2018 Pinot Noir, Burgundy"
+  pairingNote String?  @db.Text // Contoh: "Notes of cherry and earth..."
+  
+  chapter     Chapter @relation(fields: [chapterId], references: [id])
+}
+
+model Table {
+  id           String        @id @default(uuid())
+  tableNumber  String        @unique // "T1", "T2"
+  capacity     Int
+  reservations Reservation[]
+}
+
+model Reservation {
+  id              String            @id @default(uuid())
+  reservationCode String            @unique // "RES-8821" (Untuk login tamu)
+  bookingDate     DateTime
+  pax             Int
+  status          ReservationStatus @default(PENDING)
+  notes           String?
+
+  depositAmount   Int               @default(0)      // Nominal deposit (misal 500000)
+  paymentId       String?           // ID Transaksi dari Midtrans/Xendit (Mock ID dulu)
+  isRedeemed      Boolean           @default(false)  // Apakah sudah dipakai potong tagihan di Kasir?
+  currentCourse   Int               @default(0) // 0=Not Started, 1=Appetizer, 12=Petit Fours
+  userId    String
+  chapterId String
+  tableId   String? // Bisa null kalau belum di-assign admin
+
+  user    User    @relation(fields: [userId], references: [id])
+  chapter Chapter @relation(fields: [chapterId], references: [id])
+  table   Table?  @relation(fields: [tableId], references: [id])
+
+  serviceRequests ServiceRequest[]
+  guestPreferences GuestPreference?
+}
+
+model GuestPreference {
+  id            String @id @default(uuid())
+  reservationId String @unique
+  allergies     String?
+  occasion      String? // Birthday, Anniversary
+  
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+}
+
+model ServiceRequest {
+  id            String        @id @default(uuid())
+  type          String        // "WATER", "TEA", "BILL"
+  status        RequestStatus @default(NEW)
+  createdAt     DateTime      @default(now())
+  
+  reservationId String
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+}

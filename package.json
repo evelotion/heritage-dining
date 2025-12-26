@@ -1,0 +1,58 @@
+{
+  "name": "fine-dining-restaurant-platform",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Premium Restaurant Management System with Next.js 16, Reservation, and Table Companion App",
+  "author": {
+    "name": "INDRA DWI ANANDA",
+    "url": "https://www.linkedin.com/in/indra-dwi-ananda-3b6bbb118/"
+  },
+  "keywords": [
+    "restaurant",
+    "reservation system",
+    "nextjs",
+    "food ordering",
+    "pos",
+    "kitchen display system",
+    "prisma",
+    "saas"
+  ],
+  "license": "Commercial",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "postinstall": "prisma generate",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "setup": "npm install && npx prisma generate && npx prisma db push && npm run prisma:seed"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@react-email/components": "^1.0.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.556.0",
+    "next": "^16.1.1",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "resend": "^6.6.0",
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.8",
+    "prisma": "^5.22.0",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

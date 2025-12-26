@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* ===========================================
+  🎨 THEME CONFIGURATION (BUYER EDIT HERE)
+  ===========================================
+  Bagian ini menggunakan CSS Variables standard.
+  Pembeli cukup ganti Hex Code di sini untuk merubah nuansa aplikasi.
+*/
+@layer base {
+  :root {
+    /* Background Color */
+    --paper:  #F9F9F7; /* Off-white background */
+    
+    /* Text Color */
+    --ink:    #2D2D2D; /* Charcoal text (Lebih enak di mata drpd pure black) */
+    
+    /* Brand Colors */
+    --batik:  #8B5A2B; /* Primary Accent (Brown/Bronze) */
+    --gold:   #C5A059; /* Secondary Accent (Luxury/Muted Gold) */
+    --subtle: #E5E5E0; /* Borders & Dividers */
+  }
+}
+
+/* ===========================================
+  🛠️ TAILWIND SYSTEM SETUP
+  ===========================================
+  Disini kita "mengikat" variable diatas ke utility class Tailwind.
+  Contoh: class "bg-paper" akan mengambil nilai dari var(--paper)
+*/
+@theme {
+  /* --- Fonts (Connected to Next.js Font) --- */
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+
+  /* --- Color Mapping --- */
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-batik: var(--batik);
+  --color-gold: var(--gold);
+  --color-subtle: var(--subtle);
+
+  /* --- Animations --- */
+  --animate-blur-in: blurIn 0.7s ease-out forwards;
+  --animate-slide-up: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* ===========================================
+  ✨ BASE STYLES & UTILITIES
+  ===========================================
+*/
+@layer base {
+  body {
+    /* Apply default theme */
+    @apply bg-paper text-ink font-sans antialiased selection:bg-batik selection:text-paper;
+  }
+  
+  /* Auto-apply Serif font to all Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* ===========================================
+  🎬 KEYFRAMES
+  ===========================================
+*/
+@keyframes blurIn {
+  0% { opacity: 0; filter: blur(10px); scale: 1.05; }
+  100% { opacity: 1; filter: blur(0); scale: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Helper Utilities */
+@utility delay-100 { animation-delay: 100ms; }
+@utility delay-200 { animation-delay: 200ms; }
+@utility delay-300 { animation-delay: 300ms; }
+@utility delay-500 { animation-delay: 500ms; }
+@utility delay-700 { animation-delay: 700ms; }

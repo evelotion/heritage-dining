@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Fine Dining Restaurant Platform</title>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #d4a373;
+            --bg: #f9f9f9;
+            --text: #4a4a4a;
+            --sidebar-width: 280px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            background: var(--bg);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: white;
+            height: 100vh;
+            position: fixed;
+            padding: 2rem;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .nav-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: calc(var(--sidebar-width) + 4rem);
+            padding: 3rem 4rem;
+            max-width: 800px;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 2rem;
+        }
+
+        h1 { font-size: 2.5rem; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        h2 { font-size: 1.8rem; margin-top: 3rem; }
+        h3 { font-size: 1.2rem; }
+
+        code {
+            background: #eee;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="sidebar">
+        <a href="#" class="logo">Restaurant OS <span class="badge">v1.0</span></a>
+        
+        <div class="nav-group">
+            <div class="nav-header">Getting Started</div>
+            <a href="#intro" class="nav-link">Introduction</a>
+            <a href="#features" class="nav-link">Key Features</a>
+            <a href="#tech-stack" class="nav-link">Technology Stack</a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-header">Installation</div>
+            <a href="#prerequisites" class="nav-link">Prerequisites</a>
+            <a href="#local-setup" class="nav-link">Local Installation</a>
+            <a href="#deployment" class="nav-link">Deployment (Vercel)</a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-header">Configuration</div>
+            <a href="#env-vars" class="nav-link">Environment Variables</a>
+            <a href="#branding" class="nav-link">Changing Branding</a>
+            <a href="#database" class="nav-link">Database Setup</a>
+            <a href="#email" class="nav-link">Email Setup (Resend)</a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-header">Admin Guide</div>
+            <a href="#admin-login" class="nav-link">Accessing Dashboard</a>
+            <a href="#companion" class="nav-link">Table Companion App</a>
+        </div>
+    </nav>
+
+    <main class="main">
+        
+        <section id="intro">
+            <h1>Introduction</h1>
+            <p>Thank you for purchasing <strong>Fine Dining Restaurant Platform</strong>. This is a complete solution for modern restaurants, featuring a public reservation website, an immersive "Table Companion App" for guests, and a comprehensive Admin Dashboard for staff.</p>
+            <p>Designed with <strong>Next.js 16</strong> and <strong>Tailwind CSS v4</strong>, it offers blazing fast performance and SEO optimization out of the box.</p>
+        </section>
+
+        <section id="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Dynamic Reservation System:</strong> Real-time booking with deposit calculation.</li>
+                <li><strong>Table Companion App:</strong> Guests can view menus and request service via QR code.</li>
+                <li><strong>Kitchen Display System (KDS):</strong> Real-time order tracking for kitchen staff.</li>
+                <li><strong>Email Notifications:</strong> Automated confirmations via Resend.</li>
+                <li><strong>Storytelling Menu:</strong> Organize dishes by "Chapters" for a fine dining experience.</li>
+            </ul>
+        </section>
+
+        <section id="prerequisites">
+            <h2>Prerequisites</h2>
+            <p>Before you begin, ensure you have the following installed:</p>
+            <ul>
+                <li><strong>Node.js</strong> (v20.0.0 or higher)</li>
+                <li><strong>PostgreSQL</strong> (Local installation or Cloud provider like Neon/Supabase)</li>
+                <li><strong>Git</strong></li>
+            </ul>
+        </section>
+
+        <section id="local-setup">
+            <h2>Local Installation</h2>
+            <p>Follow these steps to run the project on your local machine.</p>
+            
+            <h3>1. Unzip and Install</h3>
+            <pre><code>cd your-project-folder
+npm install</code></pre>
+
+            <h3>2. Configure Environment</h3>
+            <p>Rename <code>.env.example</code> to <code>.env</code> and fill in your details.</p>
+            <pre><code>cp .env.example .env</code></pre>
+
+            <h3>3. Automatic Setup</h3>
+            <p>We have included a setup script to initialize the database and seed dummy data.</p>
+            <pre><code>npm run setup</code></pre>
+            <p>This command will:
+                <br>- Generate Prisma Client
+                <br>- Push Schema to Database
+                <br>- Seed initial data (Menu, Tables, Admin User)
+            </p>
+
+            <h3>4. Start Development Server</h3>
+            <pre><code>npm run dev</code></pre>
+            <p>Open <a href="http://localhost:3000">http://localhost:3000</a> to view the app.</p>
+        </section>
+
+        <section id="branding">
+            <h2>Changing Branding</h2>
+            <p>You can easily update the restaurant name, slogan, and contact info without touching the code.</p>
+            <p>Open file: <code>src/config/site.ts</code></p>
+            <pre><code>export const siteConfig = {
+  name: "Heritage", // Change to your Restaurant Name
+  description: "Experience the finest culinary journey...",
+  contact: {
+    phone: "+62 812 3456 7890",
+    email: "reservations@your-restaurant.com"
+  }
+  // ...
+}</code></pre>
+        </section>
+
+        <section id="admin-login">
+            <h2>Admin Login</h2>
+            <p>After running the setup script, you can login with the default credentials:</p>
+            <div class="note">
+                <strong>URL:</strong> /admin/login<br>
+                <strong>Email:</strong> admin@heritage.com<br>
+                <strong>Password:</strong> heritage2024 (Or check prisma/seed.ts)
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
