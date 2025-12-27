@@ -27,36 +27,42 @@ export default async function TablePage({ params }: Props) {
   }
 
   // =========================================================================
-  // 🛡️ SECURITY FIX START
+  // 🛡️ SECURITY FIX START (UPDATED)
   // =========================================================================
-  
+
+  // 0. Cek apakah ini TOKEN DEMO ABADI?
+  const isDemoMode = token === "DEMO-123";
+
   // 1. Validasi Tanggal: Apakah booking ini untuk hari ini?
-  // Menggunakan toDateString() untuk membandingkan tanggal saja (abaikan jam)
   const today = new Date();
   const bookingDate = new Date(reservation.bookingDate);
   const isToday = today.toDateString() === bookingDate.toDateString();
 
   // 2. Validasi Status: Apakah tamu sudah Check-In (Status: SEATED)?
-  // Ini mencegah tamu mengakses menu sebelum duduk di meja.
-  const isSeated = reservation.status === 'SEATED';
+  const isSeated = reservation.status === "SEATED";
 
-  // Jika validasi gagal, tampilkan layar "Access Denied" yang sopan
-  if (!isSeated || !isToday) {
+  // LOGIC BARU: Kalau ini DEMO-123, kita LEWATI (bypass) semua validasi tanggal/status
+  // Jika BUKAN demo mode DAN (belum seated ATAU bukan hari ini), baru kita blokir.
+  if (!isDemoMode && (!isSeated || !isToday)) {
     return (
       <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-8 text-center space-y-6 animate-fade-in">
         <div className="w-20 h-20 bg-zinc-900 rounded-full flex items-center justify-center border border-zinc-800 shadow-2xl shadow-black">
           <Lock className="w-8 h-8 text-zinc-500" />
         </div>
         <div className="space-y-2">
-          <h1 className="text-zinc-200 font-serif text-2xl">Table Not Active</h1>
+          <h1 className="text-zinc-200 font-serif text-2xl">
+            Table Not Active
+          </h1>
           <p className="text-zinc-500 text-sm font-light leading-relaxed max-w-xs mx-auto">
-            {!isToday 
-              ? "This reservation link is not for today." 
+            {!isToday
+              ? "This reservation link is not for today."
               : "Please wait for our staff to seat you and activate your table experience."}
           </p>
         </div>
         <div className="pt-8 border-t border-dashed border-zinc-800 w-full max-w-[200px]">
-          <p className="text-[10px] uppercase tracking-widest text-batik">Heritage Dining</p>
+          <p className="text-[10px] uppercase tracking-widest text-batik">
+            Heritage Dining
+          </p>
         </div>
       </div>
     );

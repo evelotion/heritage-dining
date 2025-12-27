@@ -119,7 +119,7 @@ export default function DemoPage() {
                   <span className="text-zinc-500 uppercase tracking-wider">
                     Pass
                   </span>
-                  <span className="text-zinc-300 font-mono">heritage2024</span>
+                  <span className="text-zinc-300 font-mono">12345678</span>
                 </div>
               </div>
 
