@@ -26,9 +26,7 @@ export default async function TablePage({ params }: Props) {
     return notFound();
   }
 
-  // =========================================================================
-  // 🛡️ SECURITY FIX START (UPDATED)
-  // =========================================================================
+
 
   // 0. Cek apakah ini TOKEN DEMO ABADI?
   const isDemoMode = token === "DEMO-123";
@@ -67,10 +65,7 @@ export default async function TablePage({ params }: Props) {
       </div>
     );
   }
-  // =========================================================================
-  // 🛡️ SECURITY FIX END
-  // =========================================================================
-
+ 
   return (
     <div className="flex flex-col min-h-screen pb-20 animate-fade-in">
       {/* Header Sambutan */}
