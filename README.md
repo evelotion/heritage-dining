@@ -51,7 +51,7 @@ Ikuti langkah-langkah berikut untuk menjalankan project di lokal komputer Anda.
 1.  **Clone repository:**
 
     ```bash
-    git clone [https://github.com/username/heritage-dining.git](https://github.com/username/heritage-dining.git)
+    git clone [https://github.com/evelotion/heritage-dining.git](https://github.com/evelotion/heritage-dining.git)
     cd heritage-dining
 
     ```
